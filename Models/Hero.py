@@ -22,13 +22,19 @@ class Hero: # Définition de notre classe Hero
 
     @classmethod
     def getByConf(cls, name = 'superman'):
-        life = null
+        hero = None
 
         with open('../conf/heroes.json') as confs_file:
             confs = json.load(confs_file)
 
             if name in confs:
                 conf = confs[name]
+                conf['name'] = name
+                hero = cls(**conf)
+            else:
+                print('hero doesen\'t exist, you\'ll get the default hero')
 
-                if 'life' in conf:
-                    print(conf['life'])
+        if hero is None:
+            hero = cls()
+
+        return hero
