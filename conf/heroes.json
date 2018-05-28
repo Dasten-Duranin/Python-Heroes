@@ -1,0 +1,20 @@
+{
+    "superman": {
+        "life": 50,
+        "strength": 10,
+        "speed": 6,
+        "canFly": true
+    },
+    "deadpool": {
+        "life": 50000,
+        "strength": 4,
+        "speed": 3,
+        "canFly": false 
+    },
+    "punisher": {
+        "life": 100,
+        "strength": 7,
+        "speed": 2,
+        "canFly": false
+    }
+}
