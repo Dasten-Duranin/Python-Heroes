@@ -1,5 +1,9 @@
 from random import randint
 from Models.Building import Building
+from Models.Player import Player
+from Models.Hero import Hero
+import json
+
 
 class Board:
 
@@ -7,6 +11,7 @@ class Board:
         self.columns = int(column)
         self.rows = int(row)
         self.cells = {}
+        self.players = {}
 
         self.create_grid()
 
@@ -31,12 +36,14 @@ class Board:
         for i in range(0, int(self.rows)):
             r = "|"
             for j in range(0, int(self.columns)):
+                print('cell')
+                print(self.cells[(i, j)])
                 if self.cells[(i, j)] is None:
                     r += "    |"
                 elif type(self.cells[(i, j)]) is Building:
                     r += " [] |"
-                # elif type(self.cells[(i, j)]) is player.Player:
-                # r += "AAA|"
+                elif type(self.cells[(i, j)]) is Hero:
+                    r += " P1 |"
             print(r)
 
     def count_builds_needed(self):
@@ -45,4 +52,21 @@ class Board:
 
     def count_cells(self):
         return int(self.columns) * int(self.rows)
+
+    def create_new_player(self, name):
+        player = Player(name)
+        return player
+
+    def set_player(self, player_name, heroData):
+        print(hero)
+        while True:
+            randColumn = randint(0, self.columns - 1)
+            randRow = randint(0, self.rows - 1)
+
+            if self.cells[(int(randColumn), randRow)] is None:
+                #heroModel = Hero('name', hero.life, hero.strength, hero.speed, hero.canFly, self.cells[(int(randColumn), randRow)])
+                self.cells[(int(randColumn), randRow)] = heroModel
+                self.players[player_name] = hero
+                return True
+
 

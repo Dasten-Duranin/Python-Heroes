@@ -13,34 +13,40 @@ class Engine:
 
     def _init_game(self):
         self.init_board()
-        self.init_hero()
         self.board_instance.print_board()
 
+        print('INIT OK')
+        print(self.board_instance.players)
+
     def init_board(self):
-        columns = input("nb columns : ")
-        rows = input("nb rows : ")
-
-        self.init_hero()
-
+        columns = input("Nombre de colonnes : ")
+        rows = input("Nombre de lignes : ")
         self.board_instance = Board(columns, rows)
-
         self.board_instance.add_building()
+        self.init_player()
 
     def init_player(self):
-        playerName = input("Quel est le pseudo du joueur 1: ")
-        self.init_hero()
-        player1 = Player(playerName)
+        player_name = input("Quel est le pseudo du joueur 1: ")
+        player = self.board_instance.create_new_player(player_name)
+        self.create_hero_for_user(player)
 
-        playerName = input("Quel est le pseudo du joueur 2: ")
-        player2 = Player(playerName)
+        player_name = input("Quel est le pseudo du joueur 2: ")
+        player = self.board_instance.create_new_player(player_name)
+        self.create_hero_for_user(player)
 
-    def init_hero(self):
+    def create_hero_for_user(self, player):
         with open("conf/heroes.json") as f:
-            data = json.load(f)
+            config = json.load(f)
 
-        keys = list()
+        for hero in config:
+            print('[ ' + str(config[hero]['id']) + ' ]' + ' ' + hero)
 
-        for key in data:
-            keys.append(key)
+        while True:
+            hero_id = input('Quel perso ? ')
+            hero = Hero.getById(int(hero_id))
+            if hero is None:
+                print('Invalid Hero')
+            else:
+                self.board_instance.set_player(player.name, hero)
+                return True
 
-        print(keys)

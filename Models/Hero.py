@@ -17,7 +17,6 @@ class Hero:  # Définition de notre classe Hero
         self.strength = strength
         self.speed = speed
         self.canFly = canFly
-        self.position = position
 
     def move(self, x, y):
         self.position = (x, y)
@@ -28,9 +27,6 @@ class Hero:  # Définition de notre classe Hero
     def punch(self, enemy):
         print(" BAM *** ")
         enemy.life = enemy.life - (self.speed * self.strength)
-
-    def __str__(self):
-        return "Hero instance with name is%s" % self.name
 
     @classmethod
     def getByConf(cls, name='superman'):
@@ -50,3 +46,16 @@ class Hero:  # Définition de notre classe Hero
             hero = cls()
 
         return hero
+
+    @classmethod
+    def getById(cls, id):
+
+        with open("conf/heroes.json") as confs_file:
+            config = json.load(confs_file)
+
+        for name in config:
+            if int(config[name]['id']) == id:
+                Hero(name, config['life'], config['strength'], config['speed'], config['canFly'])
+                return config[name]
+
+        return None
