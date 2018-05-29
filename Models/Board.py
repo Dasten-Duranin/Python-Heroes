@@ -40,7 +40,7 @@ class Board:
                 elif type(self.cells[(i, j)]) is Building:
                     r += " [] |"
                 elif type(self.cells[(i, j)]) is Hero:
-                    r += " P1 |"
+                    r += " Player |"
             print(r)
 
     def count_builds_needed(self):

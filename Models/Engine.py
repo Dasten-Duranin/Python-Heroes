@@ -27,9 +27,9 @@ class Engine:
         player = self.board_instance.create_new_player(player_name)
         self.create_hero_for_user(player)
 
-        #player_name = input("Quel est le pseudo du joueur 2: ")
-        #player = self.board_instance.create_new_player(player_name)
-        #self.create_hero_for_user(player)
+        player_name = input("Quel est le pseudo du joueur 2: ")
+        player = self.board_instance.create_new_player(player_name)
+        self.create_hero_for_user(player)
 
     def create_hero_for_user(self, player):
         with open("conf/heroes.json") as f:
