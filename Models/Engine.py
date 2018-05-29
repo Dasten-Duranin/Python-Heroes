@@ -15,9 +15,6 @@ class Engine:
         self.init_board()
         self.board_instance.print_board()
 
-        print('INIT OK')
-        print(self.board_instance.players)
-
     def init_board(self):
         columns = input("Nombre de colonnes : ")
         rows = input("Nombre de lignes : ")
@@ -30,9 +27,9 @@ class Engine:
         player = self.board_instance.create_new_player(player_name)
         self.create_hero_for_user(player)
 
-        player_name = input("Quel est le pseudo du joueur 2: ")
-        player = self.board_instance.create_new_player(player_name)
-        self.create_hero_for_user(player)
+        #player_name = input("Quel est le pseudo du joueur 2: ")
+        #player = self.board_instance.create_new_player(player_name)
+        #self.create_hero_for_user(player)
 
     def create_hero_for_user(self, player):
         with open("conf/heroes.json") as f:
@@ -42,11 +39,13 @@ class Engine:
             print('[ ' + str(config[hero]['id']) + ' ]' + ' ' + hero)
 
         while True:
-            hero_id = input('Quel perso ? ')
-            hero = Hero.getById(int(hero_id))
+            hero_id = input('Choisissez le personnage ? ')
+            hero = Hero.get_by_id(int(hero_id))
             if hero is None:
                 print('Invalid Hero')
             else:
-                self.board_instance.set_player(player.name, hero)
+                print('LA')
+                print(hero)
+                self.board_instance.set_player(player.get_name(), hero)
                 return True
 

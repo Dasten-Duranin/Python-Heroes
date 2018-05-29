@@ -11,8 +11,6 @@ class Board:
         self.columns = int(column)
         self.rows = int(row)
         self.cells = {}
-        self.players = {}
-
         self.create_grid()
 
     def create_grid(self):
@@ -24,20 +22,19 @@ class Board:
         builds = int(self.count_builds_needed())
 
         while builds != 0:
-            randColumn = randint(0, self.columns - 1)
-            randRow = randint(0, self.rows - 1)
+            rand_column = randint(0, self.columns - 1)
+            rand_row = randint(0, self.rows - 1)
 
-            if self.cells[(int(randColumn), randRow)] is None:
-                building = Building((randColumn, randRow))
-                self.cells[(int(randColumn), randRow)] = building
+            if self.cells[(int(rand_column), rand_row)] is None:
+                building = Building((rand_column, rand_row))
+                self.cells[(int(rand_column), rand_row)] = building
                 builds = builds - 1
 
     def print_board(self):
+
         for i in range(0, int(self.rows)):
             r = "|"
             for j in range(0, int(self.columns)):
-                print('cell')
-                print(self.cells[(i, j)])
                 if self.cells[(i, j)] is None:
                     r += "    |"
                 elif type(self.cells[(i, j)]) is Building:
@@ -47,26 +44,22 @@ class Board:
             print(r)
 
     def count_builds_needed(self):
-        nbCases = self.count_cells()
-        return nbCases * 10 / 100
+        nb_cases = self.count_cells()
+        return nb_cases * 10 / 100
 
     def count_cells(self):
         return int(self.columns) * int(self.rows)
 
     def create_new_player(self, name):
-        player = Player(name)
-        return player
+        return Player(name)
 
-    def set_player(self, player_name, heroData):
-        print(hero)
+    def set_player(self, player, hero):
         while True:
-            randColumn = randint(0, self.columns - 1)
-            randRow = randint(0, self.rows - 1)
+            rand_column = randint(0, self.columns - 1)
+            rand_row = randint(0, self.rows - 1)
 
-            if self.cells[(int(randColumn), randRow)] is None:
-                #heroModel = Hero('name', hero.life, hero.strength, hero.speed, hero.canFly, self.cells[(int(randColumn), randRow)])
-                self.cells[(int(randColumn), randRow)] = heroModel
-                self.players[player_name] = hero
+            if self.cells[(rand_column, rand_row)] is None:
+                self.cells[(rand_column, rand_row)] = hero
                 return True
 
 

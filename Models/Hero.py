@@ -48,14 +48,13 @@ class Hero:  # Définition de notre classe Hero
         return hero
 
     @classmethod
-    def getById(cls, id):
-
+    def get_by_id(cls, id):
         with open("conf/heroes.json") as confs_file:
             config = json.load(confs_file)
 
         for name in config:
             if int(config[name]['id']) == id:
-                Hero(name, config['life'], config['strength'], config['speed'], config['canFly'])
-                return config[name]
+                hero_data = config[name]
+                return Hero(name, hero_data['life'], hero_data['strength'], hero_data['speed'], hero_data['canFly'])
 
         return None
