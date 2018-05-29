@@ -1,6 +1,7 @@
 import json
 
-class Hero: # Définition de notre classe Hero 
+
+class Hero:  # Définition de notre classe Hero
     """Classe définissant un hero caractérisée par :
     - life
     - canFly
@@ -9,19 +10,30 @@ class Hero: # Définition de notre classe Hero
     - speed
     - position"""
 
-    def __init__(self, name = 'heroe', life = 50, strength = 5, speed = 1, canFly = False, position = (2, 5)): # Notre méthode constructeur
-        self.name     = name
-        self.life     = life
+    def __init__(self, name='heroe', life=50, strength=5, speed=1, canFly=False,
+                 position=(2, 5)):  # Notre méthode constructeur
+        self.name = name
+        self.life = life
         self.strength = strength
-        self.speed    = speed
-        self.canFly   = canFly
+        self.speed = speed
+        self.canFly = canFly
         self.position = position
 
+    def move(self, x, y):
+        self.position = (x, y)
+
+    def troll(self):
+        print(self + ' : Tu va crever')
+
+    def punch(self, enemy):
+        print(" BAM *** ")
+        enemy.life = enemy.life - (self.speed * self.strength)
+
     def __str__(self):
-        return "Hero instance with name is%s"%self.name
+        return "Hero instance with name is%s" % self.name
 
     @classmethod
-    def getByConf(cls, name = 'superman'):
+    def getByConf(cls, name='superman'):
         hero = None
 
         with open('../conf/heroes.json') as confs_file:
