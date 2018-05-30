@@ -35,12 +35,20 @@ class Engine:
         with open("conf/heroes.json") as f:
             config = json.load(f)
 
+        heroes = {}
+        i = 0
+
         for hero in config:
-            print('[ ' + str(config[hero]['id']) + ' ]' + ' ' + hero)
+            print('[ ' + str(i) + ' ]' + ' ' + hero)
+            heroes[i] = hero
+            i += 1
+
+        print(heroes)
 
         while True:
             hero_id = input('Choisissez le personnage ? ')
-            hero = Hero.get_by_id(int(hero_id))
+            hero = Hero.get_by_conf(heroes[int(hero_id)])
+
             if hero is None:
                 print('Invalid Hero')
             else:

@@ -28,11 +28,14 @@ class Hero:  # Définition de notre classe Hero
         print(" BAM *** ")
         enemy.life = enemy.life - (self.speed * self.strength)
 
+    def __str__(self):
+        return "Hero instance with name is %s" % self.name
+
     @classmethod
-    def getByConf(cls, name='superman'):
+    def get_by_conf(cls, name='superman'):
         hero = None
 
-        with open('../conf/heroes.json') as confs_file:
+        with open('conf/heroes.json') as confs_file:
             confs = json.load(confs_file)
 
             if name in confs:
